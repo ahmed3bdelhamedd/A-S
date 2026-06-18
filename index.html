@@ -117,7 +117,7 @@
             font-size: 1.15rem;
             font-family: 'Tajawal', sans-serif;
             text-align: center;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             outline: none;
             background: var(--rose-blush);
             color: var(--dark-text);
@@ -398,12 +398,13 @@
     <div class="lock-box">
         <span class="lock-icon">🔐</span>
         <h2>الموقع ده مخصص لشخص واحد بس</h2>
-        <p>اكتبي الرقم اللي بيجمعنا.. وافتحي قلبي</p>
+        <p>اكتبي كلمة السر الخاصة بنا.. وافتحي قلبي</p>
         <div class="input-wrap">
-            <input type="password" id="passwordInput" placeholder="● ● ● ● ● ● ● ●" autocomplete="off">
+            <!-- تم تغيير الـ placeholder لـ text عادي عشان تبان الحروف وهي بتكتبها -->
+            <input type="text" id="passwordInput" placeholder="اكتبي الباسورد هنا..." autocomplete="off" style="letter-spacing: 0px;">
         </div>
         <button class="unlock-btn" onclick="checkPassword()">افتح قلبي ❤️</button>
-        <p id="errorMessage">التاريخ غلط.. ركزي وافتكري يومنا المميز 😉</p>
+        <p id="errorMessage">الباسورد غلط.. ركزي وافتكري الكلمة السرية 😉</p>
     </div>
 </div>
 
@@ -463,19 +464,14 @@
     }
 
     // ===== PASSWORD CHECK =====
-    const CORRECT_PASSWORD = "10-8-2025";
+    // تم تغيير الكلمة السرية هنا رسمياً
+    const CORRECT_PASSWORD = "ahmedxxsafia";
 
     function checkPassword() {
-        let input = document.getElementById('passwordInput').value.trim();
+        let input = document.getElementById('passwordInput').value.trim().toLowerCase(); // تحويل الحروف لـ Small تلقائياً لمنع أي خطأ تعارض كابيتال وسمول
         const errorMsg = document.getElementById('errorMessage');
         const lockScreen = document.getElementById('lockScreen');
         const mainContent = document.getElementById('mainContent');
-
-        // تحويل الأرقام العربية (الهندية) إلى أرقام إنجليزية تلقائياً لضمان الدخول بجميع اللغات
-        const arabicDigits = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
-        for (let i = 0; i < 10; i++) {
-            input = input.replace(arabicDigits[i], i);
-        }
 
         if (input === CORRECT_PASSWORD) {
             lockScreen.style.opacity = '0';
@@ -528,7 +524,7 @@
         "سامحيني.. مفيش حد بيحبك قدي في الدنيا دي كلها",
         "انتي النجمة اللي بتنور عتمة أيامي ⭐",
         "كل صورة من دول وراها حكاية حلوة عشتها معاكي",
-        "الدنيا بتظلم في عيني لما بشوفك زعلانة",
+        "الدنيا بتظلم in عيني لما بشوفك زعلانة",
         "جمبك بحس إني ملكت الدنيا، وبزعلك بحس إني خسرت كل حاجة 🌍",
         "انتي مش بس حبيبتي، انتي كل طاقاتي الحلوة في الحياة 💕",
         "حقك عليا، وأنا هجيلك وأصالحك كل مرة"
@@ -545,10 +541,8 @@
         const gallery = document.getElementById('loveGallery');
         const baseURL = "https://raw.githubusercontent.com/ahmed3bdelhamedd/A-S/main/";
 
-        // تم تعديل الطول ليكون 29 صورة كاملين يا أحمد
         const indices = Array.from({length: 29}, (_, k) => k + 1);
         
-        // ترتيب عشوائي للـ 29 صورة
         for (let i = indices.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [indices[i], indices[j]] = [indices[j], indices[i]];
