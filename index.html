@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mody Habib Safy❤️</title>
+    <title>إلى أغلى ما في حياتي.. أنا آسف ❤️</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -416,7 +416,7 @@
         <h1 class="hero-title">مقدرش على زعلك يا أجمل حاجة في دنيتي ❤️</h1>
         <div class="hero-divider"></div>
         <p class="hero-body">
-            الدنيا بتبقى وحشة أوي والوقت مبيعديش وانتي زعلانة مني.. جمعتلك كل صورنا وذكرياتنا هنا عشان أقولك إنك أغلى حاجة في عمري، ومفيش أي حاجة تستاهل إننا نزعل من بعض.. سامحيني يا قلبي .. المستحيل قلبي يلاقي زيك.
+            الدنيا بتبقى وحشة أوي والوقت مبيعديش وانتي زعلانة مني.. جمعتلك كل صورنا وذكرياتنا هنا عشان أقولك إنك أغلى حاجة في عمري، ومفيش أي حاجة تستاهل إننا نزعل من بعض.. سامحيني يا قلبي المستحيل يلاقي زيك.
         </p>
         <p class="scroll-hint">↓ &nbsp; اسكروتي شوفي ذكرياتنا &nbsp; ↓</p>
     </section>
@@ -528,6 +528,38 @@
         "حقك عليا، وأنا هجيلك وأصالحك كل مرة"
     ];
 
+const cardLabels = [
+        "روحي وعمري 🌹",
+        "نور عينيّ ✨",
+        "قلبي وحياتي 💖",
+        "أغلى ما عندي 🥰",
+        "حبيبتي الغالية 💕",
+        "ملكة أيامي 👑",
+        "جنتي في الدنيا 🌸",
+        "أجمل ما في عمري 🌺",
+        "دفا قلبي ☀️",
+        "سرّ ابتسامتي 😊",
+        "أمنيتي الحلوة 🌙",
+        "كل معنى في حياتي 💫",
+        "عمري ومنتهاه ❤️",
+        "شمس أيامي الباردة 🌤️",
+        "أحلى لحظة في حياتي 🕊️",
+        "عشقي الأول والأخير 💗",
+        "بيتي اللي باجي له 🏡",
+        "أمانتي الغالية 🔐",
+        "وجه القمر 🌕",
+        "حكايتي الجميلة 📖",
+        "ربيع قلبي 🌷",
+        "أحلى صدفة في عمري 🍀",
+        "نبض قلبي 💓",
+        "عالمي كله 🌍",
+        "أعز ما أملك 💎",
+        "ضحكتي في الدنيا 😍",
+        "نجمة سمائي ⭐",
+        "أجمل قصيدة في عمري 🖊️",
+        "حبيبتي للأبد 💝",
+    ];
+
     function initGallery() {
         const gallery = document.getElementById('loveGallery');
         const baseURL = "https://raw.githubusercontent.com/ahmed3bdelhamedd/A-S/main/";
@@ -539,6 +571,38 @@
             [indices[i], indices[j]] = [indices[j], indices[i]];
         }
 
+
+        const romanticLabels = [
+            "لحظة لا تُنسى 💫",
+            "من أحلى الذكريات ✨",
+            "قلبي معاكي 💖",
+            "أجمل أيامي 🌹",
+            "روحي فيكي 💕",
+            "وقت من الجنة 🌸",
+            "عمري كله فيكي ❤️",
+            "بتحبك أوي 💗",
+            "أغلى لحظة 🌺",
+            "ضحكتك دنيتي 🌟",
+            "حبيبة قلبي 💓",
+            "أنتِ كل شيء 🥰",
+            "معاكي بكمّل 💞",
+            "نور عيوني 🌷",
+            "يا حلو اللقا 💝",
+            "سعادتي فيكي ⭐",
+            "أنتِ أمانتي 🔐",
+            "جمالك مش طبيعي 💫",
+            "يا واحشتيني 💘",
+            "بحبك من قلبي 🌹",
+            "أجمل إنسانة ✨",
+            "حياتي إنتِ 💖",
+            "أنتِ الأحلى 🌸",
+            "أسعد لحظاتي 💕",
+            "يا حلوتي 🌺",
+            "عمري ومنتهاه ❤️",
+            "بلاكي مش كمل 💗",
+            "بشوف فيكي كل حاجة 🥰",
+            "قلبي معاكي دايما 💞"
+        ];
         indices.forEach((i, position) => {
             const num = String(i).padStart(2, '0');
             const msg = loveMessages[position % loveMessages.length];
@@ -548,7 +612,7 @@
             card.innerHTML = `
                 <img src="${baseURL}${fileName}" alt="ذكرى رقم ${i}" loading="lazy">
                 <div class="card-body">
-                    <p class="card-num">ذكرى · ${String(i).padStart(2,'0')}</p>
+                    <p class="card-num">${cardLabels[position % cardLabels.length]}</p>
                     <p class="card-msg">${msg}</p>
                 </div>
             `;
