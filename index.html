@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى أغلى ما في حياتي.. أنا آسف ❤️</title>
+    <title>Safy 2lp Mody ❤️</title>
     <style>
         * {
             margin: 0;
@@ -96,6 +96,13 @@
             font-size: 0.95rem;
             font-weight: bold;
             display: none;
+        }
+
+        /* أنيميشن اهتزاز صندوق الباسورد عند الخطأ */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
         /* باقي ستايل الموقع */
@@ -194,128 +201,3 @@
     </style>
 </head>
 <body>
-
-    <!-- شاشة القفل التفاعلية -->
-    <div id="lockScreen">
-        <div class="lock-box">
-            <h2>الموقع ده مخصص لشخص واحد بس 🔐</h2>
-            <p>علشان تشوفي المحتوى.. اكتبي الباسورد السري بتاعنا هنا:</p>
-            <input type="password" id="passwordInput" placeholder="اكتبي كلمة السر هنا...">
-            <button onclick="checkPassword()">افتح قلبي ❤️</button>
-            <p id="errorMessage">تؤتؤ.. مش انتي حبيبتي! جربي تاني كده؟ 🤔</p>
-        </div>
-    </div>
-
-    <header>
-        <h1>مقدرش على زعلك يا أجمل حاجة في دنيتي ❤️</h1>
-        <p class="love-text">
-            الدنيا بتبقى وحشة أوي والوقت مبيعديش وانتي زعلانة مني.. جمعتلك كل صورنا وذكرياتنا هنا عشان أقولك إنك أغلى حاجة في عمري، ومفيش أي حاجة تستاهل إننا نزعل من بعض.. سامحيني يا قلبي المستحيل يلاقي زيك. ✨
-        </p>
-    </header>
-
-    <section class="gallery" id="loveGallery"></section>
-
-    <footer>
-        <p>مستني ضحكتك تنور دنيتي تاني.. بحبك 🔐💖</p>
-    </footer>
-
-    <script>
-        // 1. نظام التحقق من الباسورد
-        function checkPassword() {
-            const input = document.getElementById('passwordInput').value;
-            const errorMsg = document.getElementById('errorMessage');
-            const lockScreen = document.getElementById('lockScreen');
-
-            // --- هنا بتكتب الباسورد اللي انت عاوزه (حاليًا هو 1234) ---
-            const correctPassword = "1234"; 
-
-            if (input === correctPassword) {
-                // أنيميشن إخفاء شاشة القفل بشكل سلس
-                lockScreen.style.opacity = '0';
-                lockScreen.style.transform = 'scale(0.8)';
-                setTimeout(() => {
-                    lockScreen.style.display = 'none';
-                    // تشغيل تساقط القلوب فقط بعد فتح الموقع
-                    setInterval(createHeart, 300);
-                }, 800);
-            } else {
-                errorMsg.style.display = 'block';
-                // هزّ الصندوق كأنيميشن خطأ
-                document.querySelector('.lock-box').style.animation = 'shake 0.3s ease-in-out';
-                setTimeout(() => {
-                    document.querySelector('.lock-box').style.animation = '';
-                }, 300);
-            }
-        }
-
-        // إضافة دعم لزر الـ Enter عند كتابة الباسورد
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-
-        // 2. أنيميشن تساقط القلوب
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
-            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
-            
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 5000);
-        }
-
-        // 3. عبارات صلح وحب مخصصة تظهر تحت الـ 29 صورة
-        const loveMessages = [
-            "مقدرش على زعلك، ضحكتك بالدنيا كلها 💖",
-            "كل لحظة في الصور دي بتفكرني بقد إيه أنا محظوظ بيكي ✨",
-            "انتي الأمان اللي مش عاوز أخسره أبداً 🥰",
-            "زعلك على عيني، ومستحيل أهون عليا تسيبيني زعلان",
-            "يا رب يديمك في حياتي وينهي أي زعل بيننا 🔐",
-            "مكانك في قلبي ثابت ومبيغيروش أي موقف",
-            "سامحيني، مفيش حد بيحبك قدي في الدنيا دي كلها",
-            "انتي النجمة اللي بتنور عتمة أيامي، بلاش تطفيها بزعلك ⭐",
-            "كل صورة من دول وراها حكاية حلوة عشتها معاكي",
-            "الدنيا بتظلم في عيني لما بشوفك زعلانة",
-            "جمبك بحس إني ملكت الدنيا، وبزعلك بحس إني خسرت كل حاجة 🌍",
-            "انتي مش بس حبيبتي، انتي كل طاقاتي الحلوة في الحياة",
-            "حقك عليا، والمرة دي وكل مرة أنا اللي هجيلك وأصالحك 💕"
-        ];
-
-        // 4. توليد الـ 29 صورة تلقائياً
-        const galleryContainer = document.getElementById('loveGallery');
-        const totalPhotos = 29;
-
-        for (let i = 1; i <= totalPhotos; i++) {
-            const photoNumber = String(i).padStart(2, '0');
-            const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
-
-            const card = document.createElement('div');
-            card.classList.add('photo-card');
-
-            card.innerHTML = `
-                <img src="${photoNumber}.jpg" alt="ذكرى رقم ${photoNumber}">
-                <div class="photo-desc">${randomMessage}</div>
-            `;
-
-            galleryContainer.appendChild(card);
-        }
-
-        // 5. أنيميشن ظهور الصور بسلاسة عند السكرول لأسفل
-        const cards = document.querySelectorAll('.photo-card');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        cards.forEach(card => observer.observe(card));
-    </script>
-</body>
-</html>
