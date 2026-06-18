@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safy Habibet Mody ❤️</title>
+    <title>Ahmed Habib Safy ❤️</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -415,7 +415,7 @@
         <h1 class="hero-title">مقدرش على زعلك يا أجمل حاجة في دنيتي ❤️</h1>
         <div class="hero-divider"></div>
         <p class="hero-body">
-            الدنيا بتبقى وحشة أوي والوقت مبيعديش وانتي زعلانة مني.. جمعتلك كل صورنا وذكرياتنا هنا عشان أقولك إنك أغلى حاجة في عمري، ومفيش أي حاجة تستاهل إننا نزعل من بعض.. سامحيني يا قلبي ..  المستحيل قلبي يلاقي زيك.
+            الدنيا بتبقى وحشة أوي والوقت مبيعديش وانتي زعلانة مني.. جمعتلك كل صورنا وذكرياتنا هنا عشان أقولك إنك أغلى حاجة في عمري، ومفيش أي حاجة تستاهل إننا نزعل من بعض.. سامحيني يا قلبي المستحيل يلاقي زيك.
         </p>
         <p class="scroll-hint">↓ &nbsp; اسكروتي شوفي ذكرياتنا &nbsp; ↓</p>
     </section>
@@ -521,10 +521,17 @@
     function initGallery() {
         const gallery = document.getElementById('loveGallery');
         const baseURL = "https://raw.githubusercontent.com/ahmed3bdelhamedd/A-S/main/";
-        for (let i = 1; i <= 29; i++) {
+
+        // ترتيب عشوائي بـ Fisher-Yates
+        const indices = Array.from({length: 29}, (_, k) => k + 1);
+        for (let i = indices.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
+
+        indices.forEach((i, position) => {
             const num = String(i).padStart(2, '0');
-            const msg = loveMessages[(i - 1) % loveMessages.length];
-            // filenames: 01.jpeg … 09.jpeg then 010.jpeg … 029.jpeg
+            const msg = loveMessages[position % loveMessages.length];
             const fileName = i <= 9 ? `0${i}.jpeg` : `0${num}.jpeg`;
             const card = document.createElement('div');
             card.className = 'photo-card';
@@ -536,7 +543,7 @@
                 </div>
             `;
             gallery.appendChild(card);
-        }
+        });
     }
 
     function initScrollObserver() {
