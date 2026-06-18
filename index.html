@@ -7,17 +7,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* تم دمج الـ CSS الخاص بك هنا كاملاً */
         :root { --rose-deep: #b5173a; --rose-mid: #e63262; --rose-soft: #ff7096; --rose-pale: #ffd6e0; --rose-blush: #fff0f3; --gold: #d4a847; --cream: #fffaf4; --dark-text: #3b0a18; --mid-text: #7a2232; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: var(--cream); font-family: 'Tajawal', sans-serif; color: var(--dark-text); overflow-x: hidden; }
         
         #lockScreen { position: fixed; inset: 0; z-index: 10000; display: flex; justify-content: center; align-items: center; background: radial-gradient(ellipse at 60% 40%, #ffd6e0 0%, #ffb3c6 40%, #e63262 100%); }
         .lock-box { background: rgba(255,255,255,0.92); padding: 50px 40px; border-radius: 30px; text-align: center; max-width: 420px; width: 92%; }
-        .unlock-btn { width: 100%; background: linear-gradient(135deg, var(--rose-mid), var(--rose-deep)); color: white; border: none; padding: 14px 35px; border-radius: 50px; cursor: pointer; font-size: 1.15rem; font-weight: 700; }
+        .unlock-btn { width: 100%; background: linear-gradient(135deg, var(--rose-mid), var(--rose-deep)); color: white; border: none; padding: 14px 35px; border-radius: 50px; cursor: pointer; font-size: 1.15rem; font-weight: 700; margin-top: 20px; }
         #errorMessage { color: var(--rose-deep); margin-top: 14px; font-weight: 700; display: none; }
         
-        #music-control-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 2000; background: rgba(181, 23, 58, 0.95); backdrop-filter: blur(10px); padding: 12px 25px; border-radius: 50px; display: none; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.2); }
+        /* عداد الوقت والستايلات الأصلية */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 24px 40px; }
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .timer-block { background: var(--rose-blush); padding: 12px 8px; border-radius: 15px; }
+        .timer-num { font-size: 1.6rem; font-weight: 900; color: var(--rose-mid); display: block; }
+        
+        #music-control-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 2000; background: rgba(181, 23, 58, 0.95); padding: 12px 25px; border-radius: 50px; display: none; align-items: center; gap: 15px; }
         .play-music-btn { background: white; color: var(--rose-deep); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
         .music-text { color: white; font-weight: 700; }
     </style>
@@ -27,8 +32,7 @@
 
 <div id="lockScreen">
     <div class="lock-box">
-        <span style="font-size: 3.5rem;">🔐</span>
-        <h2>الموقع ده مخصص لشخص واحد بس</h2>
+        <h2>اكتبي كلمة السر الخاصة بنا.. وافتحي قلبي</h2>
         <input type="text" id="passwordInput" placeholder="اكتبي الباسورد هنا..." style="width: 100%; padding: 14px; margin: 20px 0; border-radius: 50px; border: 2px solid #ffd6e0; text-align: center;">
         <button class="unlock-btn" id="submitBtn">افتح قلبي ❤️</button>
         <p id="errorMessage">الباسورد غلط.. ركزي وافتكري الكلمة السرية 😉</p>
@@ -36,9 +40,16 @@
 </div>
 
 <main id="mainContent" style="display:none;">
-    <section class="hero" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;">
-        <h1>مقدرش على زعلك يا أجمل حاجة في دنيتي ❤️</h1>
-        <p>بحبك من غير حدود.. أنا آسف يا قلبي.</p>
+    <section class="hero">
+        <h1 class="hero-title">مقدرش على زعلك يا أجمل حاجة في دنيتي ❤️</h1>
+        <div class="timer-section">
+            <div class="timer-grid">
+                <div class="timer-block"><span class="timer-num" id="timer-days">00</span><span class="timer-label">يوم</span></div>
+                <div class="timer-block"><span class="timer-num" id="timer-hours">00</span><span class="timer-label">ساعة</span></div>
+                <div class="timer-block"><span class="timer-num" id="timer-minutes">00</span><span class="timer-label">دقيقة</span></div>
+                <div class="timer-block"><span class="timer-num" id="timer-seconds">00</span><span class="timer-label">ثانية</span></div>
+            </div>
+        </div>
     </section>
 
     <div id="music-control-bar">
@@ -60,23 +71,33 @@
 
     document.getElementById('musicBtn').addEventListener('click', function() {
         if (player && player.playVideo) {
-            player.seekTo(33); // الأغنية تبدأ من الثانية 33
+            player.seekTo(33); 
             player.playVideo();
             this.innerText = '⏸️';
         }
     });
 
     document.getElementById('submitBtn').addEventListener('click', function() {
-        const password = document.getElementById('passwordInput').value.trim();
-        if (password === "ahmedxxsafia") {
+        if (document.getElementById('passwordInput').value.trim() === "ahmedxxsafia") {
             document.getElementById('lockScreen').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
             document.getElementById('music-control-bar').style.display = 'flex';
+            startTimer();
         } else {
             document.getElementById('errorMessage').style.display = 'block';
         }
     });
-</script>
 
+    function startTimer() {
+        const targetDate = new Date("2025-08-10T00:00:00").getTime();
+        setInterval(() => {
+            const diff = new Date().getTime() - targetDate;
+            document.getElementById("timer-days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("timer-hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("timer-minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("timer-seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+    }
+</script>
 </body>
 </html>
