@@ -409,7 +409,7 @@
         <div class="input-wrap">
             <input type="password" id="passwordInput" placeholder="● ● ● ● ● ● ● ●" autocomplete="off">
         </div>
-        <button class="unlock-btn" onclick="checkPassword()">افتح قلبي ❤️</button>
+        <button class="unlock-btn" onclick="validatePassword()">افتح قلبي ❤️</button>
         <p id="errorMessage">الباسورد غلط.. ركزي وافتكري الكلمة السرية 😉</p>
     </div>
 </div>
@@ -485,7 +485,7 @@
     // ===== PASSWORD CHECK =====
     const CORRECT_PASSWORD = "ahmedxxsafia";
 
-    function checkPassword() {
+    function validatePassword() {
         let input = document.getElementById('passwordInput').value.trim().toLowerCase();
         const errorMsg = document.getElementById('errorMessage');
         const lockScreen = document.getElementById('lockScreen');
@@ -495,76 +495,3 @@
             lockScreen.style.opacity = '0';
             lockScreen.style.transform = 'scale(1.02)';
             setTimeout(() => {
-                lockScreen.style.display = 'none';
-                mainContent.style.display = 'block';
-                startHeartsRain();
-                setTimeout(startMusic, 300); 
-                initGallery();
-                startCountdown();
-            }, 800);
-        } else {
-            errorMsg.style.display = 'block';
-            document.getElementById('passwordInput').value = '';
-        }
-    }
-
-    document.getElementById('passwordInput').addEventListener('keypress', e => {
-        if (e.key === 'Enter') checkPassword();
-    });
-
-    // ===== COUNTDOWN TIMER =====
-    function startCountdown() {
-        const startDate = new Date("August 10, 2025 00:00:00").getTime();
-
-        setInterval(() => {
-            const now = new Date().getTime();
-            const difference = now - startDate;
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            document.getElementById("timer-days").textContent = String(days).padStart(2, '0');
-            document.getElementById("timer-hours").textContent = String(hours).padStart(2, '0');
-            document.getElementById("timer-minutes").textContent = String(minutes).padStart(2, '0');
-            document.getElementById("timer-seconds").textContent = String(seconds).padStart(2, '0');
-        }, 1000);
-    }
-
-    // ===== HEARTS RAIN =====
-    function startHeartsRain() {
-        setInterval(() => {
-            const h = document.createElement('div');
-            h.className = 'heart';
-            h.textContent = ['❤️','💕','💖','💗','🌹'][Math.floor(Math.random()*5)];
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.fontSize = (Math.random() * 14 + 14) + 'px';
-            h.style.opacity = Math.random() * 0.5 + 0.4;
-            h.style.animationDuration = (Math.random() * 4 + 3) + 's';
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 6000);
-        }, 400);
-    }
-
-    // ===== GALLERY WITH ADVANCED MULTI-FALLBACK ENGINE =====
-    const loveMessages = [
-        "مقدرش على زعلك.. ضحكتك بالدنيا كلها 💖",
-        "كل لحظة هنا بتفكرني بقد إيه أنا محظوظ بكي ✨",
-        "انتي الأمان اللي مش عاوز أخسره أبداً 🥰",
-        "زعلك على عيني، ومستحيل أهون عليا تسيبيني زعلان",
-        "يا رب يديمك في حياتي وينهي أي زعل بيننا 🔐",
-        "مكانك في قلبي ثابت ومبيغيروش أي موقف",
-        "سامحيني.. مفيش حد بيحبك قدي في الدنيا دي كلها",
-        "انتي النجمة اللي بتنور عتمة أيامي ⭐",
-        "كل صورة من دول وراها حكاية حلوة عشتها معاكي",
-        "الدنيا بتظلم في عيني لما بشوفك زعلانة",
-        "جمبك بحس إني ملكت الدنيا، وبزعلك بحس إني خسرت كل حاجة 🌍",
-        "انتي مش بس حبيبتي، انتي كل طاقاتي الحلوة في الحياة 💕",
-        "حقك عليا، وأنا هجيلك وأصالحك كل مرة"
-    ];
-
-    const cardLabels = [
-        "روحي وعمري 🌹", "نور عينيّ ✨", "قلبي وحياتي 💖", "أغلى ما عندي 🥰",
-        "حبيبتي الغالية 💕", "ملكة أيامي 👑", "جنتي في الدنيا 🌸", "أجمل ما في عمري 🌺",
-        "دفا قلبي ☀️", "سرّ ابتسامتي 😊", "أمنيتي الحلوة 🌙", "كل معنى في حياتي
