@@ -11,18 +11,19 @@
         /* شاشة القفل */
         #lockScreen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(135deg, #ffb3c6, #ffe5ec); z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: all 0.8s ease-in-out; }
         .lock-box { background: white; padding: 40px 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(201, 24, 74, 0.2); text-align: center; max-width: 400px; width: 90%; }
-        .lock-box input { width: 100%; padding: 12px; border: 2px solid #ffb3c6; border-radius: 50px; font-size: 1.2rem; text-align: center; margin-bottom: 15px; }
-        .lock-box button { background: #c9184a; color: white; border: none; padding: 12px 35px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        .lock-box input { width: 100%; padding: 12px; border: 2px solid #ffb3c6; border-radius: 50px; font-size: 1.2rem; text-align: center; margin-bottom: 15px; outline: none; }
+        .lock-box button { background: #c9184a; color: white; border: none; padding: 12px 35px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.1rem; }
         
-        /* زر تشغيل الأغنية */
-        #musicBtn { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 999; background: #c9184a; color: white; padding: 15px 25px; border-radius: 50px; border: none; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); animation: pulse 2s infinite; }
-        
-        @keyframes pulse { 0% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.05); } 100% { transform: translateX(-50%) scale(1); } }
-
+        /* تصميم العرض */
+        header { padding: 50px 20px; }
         .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 40px 20px; }
-        .photo-card { background: #fff; padding: 15px; border-radius: 15px; width: 300px; box-shadow: 0 10px 25px rgba(201, 24, 74, 0.15); }
-        .photo-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; }
-        .card-heart { font-size: 28px; color: #c9184a; margin: 10px 0; }
+        .photo-card { background: #fff; padding: 15px; border-radius: 15px; width: 300px; box-shadow: 0 10px 25px rgba(201, 24, 74, 0.15); transition: 0.3s; }
+        .photo-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 2px solid #ffb3c6; }
+        .card-heart { font-size: 28px; color: #c9184a; margin: 15px 0; animation: pulse 1.5s infinite; }
+        .photo-desc { font-size: 1.1rem; font-weight: bold; color: #7a2232; margin-top: 5px; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        
+        #tapHint { display: none; color: #c9184a; font-weight: bold; margin-top: 20px; padding: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -36,43 +37,66 @@
         </div>
     </div>
 
-    <!-- زر تشغيل الأغنية هيظهر بعد فتح القفل -->
-    <button id="musicBtn" onclick="playMusic()">شغلي الأغنية يا قلبي ❤️</button>
+    <div id="tapHint">اضغطي في أي مكان في الصفحة عشان تشغلي الأغنية 🎵</div>
     <div id="musicContainer" style="display: none;"></div>
 
-    <header style="padding: 50px 20px;">
-        <h1>مقدرش على زعلك ❤️</h1>
+    <header>
+        <h1>مقدرش على زعلك يا أجمل حاجة في دنيتي ❤️</h1>
     </header>
 
     <section class="gallery" id="loveGallery"></section>
 
     <script>
+        const loveMessages = [
+            "مقدرش على زعلك، ضحكتك بالدنيا كلها 💖",
+            "كل لحظة في الصور دي بتفكرني بقد إيه أنا محظوظ بيكي ✨",
+            "انتي الأمان اللي مش عاوز أخسره أبداً 🥰",
+            "زعلك على عيني، ومستحيل أهون عليا تسيبيني زعلان",
+            "يا رب يديمك في حياتي وينهي أي زعل بيننا 🔐",
+            "مكانك في قلبي ثابت ومبيغيروش أي موقف",
+            "سامحيني، مفيش حد بيحبك قدي في الدنيا دي كلها",
+            "انتي النجمة اللي بتنور عتمة أيامي، بلاش تطفيها بزعلك ⭐",
+            "كل صورة من دول وراها حكاية حلوة عشتها معاكي",
+            "الدنيا بتظلم في عيني لما بشوفك زعلانة"
+        ];
+
         function checkPassword() {
             if (document.getElementById('passwordInput').value === "ahmedxxsafia") {
                 document.getElementById('lockScreen').style.display = 'none';
-                document.getElementById('musicBtn').style.display = 'block'; // إظهار الزر
+                document.getElementById('tapHint').style.display = 'block';
+                
+                document.body.addEventListener('click', function() {
+                    const youtubeVideoID = "hcf-wL5f-sw";
+                    const musicDiv = document.getElementById('musicContainer');
+                    if (musicDiv.innerHTML === "") {
+                        musicDiv.innerHTML = `<iframe width="0" height="0" src="https://www.youtube.com/embed/${youtubeVideoID}?autoplay=1&start=33&loop=1&playlist=${youtubeVideoID}" frameborder="0" allow="autoplay"></iframe>`;
+                        document.getElementById('tapHint').style.display = 'none';
+                    }
+                }, { once: true });
             } else {
                 document.getElementById('errorMessage').style.display = 'block';
             }
         }
 
-        function playMusic() {
-            const youtubeVideoID = "hcf-wL5f-sw";
-            const musicDiv = document.getElementById('musicContainer');
-            musicDiv.innerHTML = `<iframe width="0" height="0" src="https://www.youtube.com/embed/${youtubeVideoID}?autoplay=1&start=33&loop=1&playlist=${youtubeVideoID}" frameborder="0" allow="autoplay"></iframe>`;
-            document.getElementById('musicBtn').style.display = 'none'; // إخفاء الزر بعد الضغط
-        }
-
-        // إنشاء الصور عشوائياً
+        // إنشاء الصور والجمل بشكل عشوائي
         const galleryContainer = document.getElementById('loveGallery');
         let photoNumbers = [];
-        for (let i = 1; i <= 29; i++) photoNumbers.push("0" + i);
+        for (let i = 1; i <= 29; i++) {
+            photoNumbers.push(i < 10 ? "0" + i : i);
+        }
+        
+        // خلط الصور
         photoNumbers.sort(() => Math.random() - 0.5);
 
         photoNumbers.forEach(num => {
+            const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
             const card = document.createElement('div');
             card.className = 'photo-card';
-            card.innerHTML = `<img src="${num}.jpeg"><div class="card-heart">❤️</div>`;
+            card.innerHTML = `
+                <img src="${num}.jpeg">
+                <div class="card-heart">❤️</div>
+                <div class="photo-desc">${randomMessage}</div>
+            `;
             galleryContainer.appendChild(card);
         });
     </script>
